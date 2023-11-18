@@ -1,14 +1,27 @@
 import React from "react";
+import { Button } from "@chakra-ui/react";
 
 const ButtonComponent = () => {
   return (
     <div>
-      <button className="button-size">XS</button>
-      <button className="button-size">S</button>
-      <button className="button-size">M</button>
-      <button className="button-size">L</button>
-      <button className="button-size">XL</button>
-      <button className="button-size">XXL</button>
+      <Button size="sm" rounded="full">
+        XS
+      </Button>
+      <Button size="sm" rounded="full">
+        S
+      </Button>
+      <Button size="sm" rounded="full">
+        M
+      </Button>
+      <Button size="sm" rounded="full">
+        L
+      </Button>
+      <Button size="sm" rounded="full">
+        XL
+      </Button>
+      <Button size="sm" rounded="full">
+        XXL
+      </Button>
     </div>
   );
 };

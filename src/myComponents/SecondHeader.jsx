@@ -1,21 +1,28 @@
-// SecondHeader.jsx
-
 import React from "react";
-import "../componentStyles/SecondHeader.css";
-import logo from "/Logo.png"; // Replace 'logo.svg' with the path to your logo file
+import { Box, Image, Flex, Button } from "@chakra-ui/react";
+
+import logo from "/Logo.png"; // Replace 'Logo.png' with the path to your logo file
 
 const SecondHeader = () => {
   return (
-    <div className="second-header">
-      <div className="logo-container">
-        <img src={logo} alt="Logo" className="logo" />
-      </div>
-      <div className="icons-container">
-        <i className="material-icons">icon1</i>
-        <i className="material-icons">icon2</i>
-        <i className="material-icons">icon3</i>
-      </div>
-    </div>
+    <Box className="second-header">
+      <Flex align="center" justify="space-between" px={4} py={2}>
+        <Box className="logo-container">
+          <Image src={logo} alt="Logo" className="logo" />
+        </Box>
+        <Box className="buttons-container">
+          <Button variant="outline" color="black" size="md" mr={2}>
+            Men
+          </Button>
+          <Button variant="outline" color="black" size="md" mr={2}>
+            Women
+          </Button>
+          <Button variant="outline" color="black" size="md">
+            Children
+          </Button>
+        </Box>
+      </Flex>
+    </Box>
   );
 };
 

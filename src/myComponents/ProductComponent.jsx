@@ -1,5 +1,16 @@
 import React, { useState, useEffect } from "react";
 import "../componentStyles/ProductGrid.css";
+import {
+  Card,
+  CardBody,
+  Image,
+  Stack,
+  Heading,
+  Text,
+  Divider,
+  Button,
+  ButtonGroup,
+} from "@chakra-ui/react";
 
 const ProductComponent = () => {
   const [products, setProducts] = useState([]);
@@ -19,19 +30,26 @@ const ProductComponent = () => {
   }
 
   return (
-    <div>
-      <div className="product-grid">
-        {products.map((product, index) => (
-          <div className="product-item" key={index}>
-            {/* Render your product information inside this div */}
-            <img src={product.image} alt={product.name} />
-            <p>{product.brand}</p>
-            <p>{product.name}</p>
-            <p className="product-price">${product.price}</p>
-            <button className="product-button">Add to cart</button>
-          </div>
-        ))}
-      </div>
+    <div className="product-grid">
+      {products.map((product, index) => (
+        <Card key={index} maxW="sm" boxShadow="md" borderRadius="lg">
+          <Image src={product.image} alt={product.name} borderRadius="lg" />
+          <CardBody>
+            <Stack mt="6" spacing="3">
+              <Heading size="md">{product.name}</Heading>
+              <Text>{product.description}</Text>
+              <Text color="blue.600" fontSize="2xl">
+                ${product.price}
+              </Text>
+            </Stack>
+          </CardBody>
+          <Divider />
+
+          <Button variant="solid" colorScheme="blue">
+            Add to cart
+          </Button>
+        </Card>
+      ))}
     </div>
   );
 };
