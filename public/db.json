@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "name": "Stylish Jacket",
+    "description": "A fashionable jacket for all occasions.",
+    "image": "/productImages/Hoodie.jpg",
+    "price": 49.99,
+    "brand": "SIKSILK"
+  },
+  {
+    "id": 2,
+    "name": "Comfortable Sneakers",
+    "description": "Durable and comfortable sneakers for daily wear.",
+    "image": "/productImages/Hoodie.jpg",
+    "price": 79.99,
+    "brand": "SIKSILK"
+  },
+  {
+    "id": 3,
+    "name": "Casual Jeans",
+    "description": "Classic jeans for a trendy look.",
+    "image": "/productImages/Hoodie.jpg",
+    "price": 39.99,
+    "brand": "SIKSILK"
+  },
+  {
+    "id": 4,
+    "name": "Casual Jeans",
+    "description": "Classic jeans for a trendy look.",
+    "image": "/productImages/Hoodie.jpg",
+    "price": 39.99,
+    "brand": "SIKSILK"
+  },
+  {
+    "id": 5,
+    "name": "Casual Jeans",
+    "description": "Classic jeans for a trendy look.",
+    "image": "/productImages/Hoodie.jpg",
+    "price": 39.99,
+    "brand": "SIKSILK"
+  },
+  {
+    "id": 6,
+    "name": "Casual Jeans",
+    "description": "Classic jeans for a trendy look.",
+    "image": "/productImages/Hoodie.jpg",
+    "price": 39.99,
+    "brand": "SIKSILK"
+  }
+]
