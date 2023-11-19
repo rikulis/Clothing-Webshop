@@ -45,7 +45,7 @@ const ProductComponent = () => {
           </CardBody>
           <Divider />
 
-          <Button variant="solid" colorScheme="blue">
+          <Button variant="solid" colorScheme="blue" rounded="none">
             Add to cart
           </Button>
         </Card>

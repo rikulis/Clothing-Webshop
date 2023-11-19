@@ -1,42 +1,51 @@
 import React from "react";
-import { Box, Flex, Spacer, Input, Text } from "@chakra-ui/react";
-
+import { Box, Flex, Spacer, Input, Link } from "@chakra-ui/react";
+import "../componentStyles/Header.css";
 const Header = () => {
   return (
     <Box className="header" py={4} borderBottom="1px" borderColor="gray.200">
       <Flex align="center">
         <nav>
-          <ul
-            style={{
-              listStyle: "none",
-              display: "flex",
-              alignItems: "center",
-              gap: "20px",
-            }}
-          >
+          <ul>
             <li>
-              <Text fontWeight="bold">Clothing</Text>
+              <Link fontWeight="bold" className="header-link">
+                Clothing
+              </Link>
             </li>
             <li>
-              <Text fontWeight="bold">Boots</Text>
+              <Link fontWeight="bold" className="header-link">
+                Boots
+              </Link>
             </li>
             <li>
-              <Text fontWeight="bold">Jackets</Text>
+              <Link fontWeight="bold" className="header-link">
+                Jackets
+              </Link>
             </li>
             <li>
-              <Text fontWeight="bold">Dresses</Text>
+              <Link fontWeight="bold" className="header-link">
+                Dresses
+              </Link>
             </li>
             <li>
-              <Text fontWeight="bold">Accessories</Text>
+              <Link fontWeight="bold" className="header-link">
+                Accessories
+              </Link>
             </li>
             <li>
-              <Text fontWeight="bold">Sport</Text>
+              <Link fontWeight="bold" className="header-link">
+                Sport
+              </Link>
             </li>
             <li>
-              <Text fontWeight="bold">Accessories</Text>
+              <Link fontWeight="bold" className="header-link">
+                Accessories
+              </Link>
             </li>
             <li>
-              <Text fontWeight="bold">Ale</Text>
+              <Link fontWeight="bold" className="header-link">
+                Ale
+              </Link>
             </li>
           </ul>
         </nav>
