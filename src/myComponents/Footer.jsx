@@ -1,14 +1,7 @@
 import React from "react";
-import {
-  Container,
-  Stack,
-  IconButton,
-  Text,
-  Link,
-  HStack,
-  Image,
-} from "@chakra-ui/react";
+import { Container, HStack, VStack, Text, Link } from "@chakra-ui/react";
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import "../componentStyles/Footer.css";
 
 const Footer = () => (
   <Container
@@ -19,47 +12,52 @@ const Footer = () => (
     maxW="full"
     centerContent
   >
-    <Stack spacing={{ base: "4", md: "5" }} align="center" w="full">
-      {/* Social Media Icons */}
-      <HStack spacing={4}>
-        <IconButton
-          as={Link}
-          href="#"
-          aria-label="LinkedIn"
-          icon={<FaLinkedin />}
-        />
-        <IconButton
-          as={Link}
-          href="#"
-          aria-label="GitHub"
-          icon={<FaGithub />}
-        />
-        <IconButton
-          as={Link}
-          href="#"
-          aria-label="Twitter"
-          icon={<FaTwitter />}
-        />
-      </HStack>
+    <HStack
+      spacing={{ base: "4", md: "5" }}
+      align="center"
+      w="full"
+      justify={"space-around"}
+    >
+      <VStack align="start">
+        <Text fontWeight="bold" fontSize="lg">
+          HELP
+        </Text>
+        <Link className="footer-link">Your Account</Link>
+        <Link className="footer-link">FAQ</Link>
+        <Link className="footer-link">Contact Us</Link>
+      </VStack>
+      <VStack align="start">
+        <Text fontWeight="bold" fontSize="lg">
+          ABOUT
+        </Text>
+        <Link className="footer-link">Blog</Link>
+        <Link className="footer-link">Our Story</Link>
+        <Link className="footer-link">Sitemap</Link>
+      </VStack>
+      <VStack align="start">
+        <Text fontWeight="bold" fontSize="lg">
+          PRODUCT
+        </Text>
+        <Link className="footer-link">Return Policy</Link>
+        <Link className="footer-link">Product Care</Link>
+        <Link className="footer-link">Distributors</Link>
+      </VStack>
+      <VStack align="start">
+        <Text fontWeight="bold" fontSize="lg">
+          SOCIAL
+        </Text>
+        <Link className="footer-link">Instagram</Link>
+        <Link className="footer-link">Facebook</Link>
+        <Link className="footer-link">Twitter</Link>
+      </VStack>
+    </HStack>
 
-      {/* Texts */}
-      <Stack spacing={2} align="center">
-        <Text fontSize="sm" color="gray.600">
-          Follow us on social media for updates
-        </Text>
-        <Text fontSize="sm" color="gray.600">
-          Info | Support | Marketing
-        </Text>
-      </Stack>
-
-      {/* Copyright and Logos */}
-      <Stack spacing={2} align="center">
-        <Text fontSize="sm" color="gray.600">
-          &copy; {new Date().getFullYear()} WEARIT, Inc. All rights
-          reserved.
-        </Text>
-      </Stack>
-    </Stack>
+    {/* Copyright Section */}
+    <VStack align="center" mt={4} py={10}>
+      <Text fontSize="sm" color="gray.600">
+        &copy; {new Date().getFullYear()} WEARIT. All rights reserved.
+      </Text>
+    </VStack>
   </Container>
 );
 

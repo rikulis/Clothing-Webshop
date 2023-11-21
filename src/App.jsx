@@ -13,7 +13,6 @@ function App() {
         <SecondHeader></SecondHeader>
         <Header></Header>
 
-        <h3>Sizes</h3>
         <ButtonComponent></ButtonComponent>
       </div>
       <ProductComponent></ProductComponent>

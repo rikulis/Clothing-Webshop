@@ -27,3 +27,11 @@ nav ul li {
 nav ul li:hover {
   text-decoration: underline;
 }
+
+.footer-link {
+  font-weight: normal; /* Bold font */
+}
+
+.footer-link:hover {
+  text-decoration: none; /* Remove underline */
+}
