@@ -8,12 +8,12 @@ const Header = () => {
         <nav>
           <ul>
             <li>
-              <Link fontWeight="bold" className="header-link">
+              <Link fontWeight="bold" textDecor="none">
                 Clothing
               </Link>
             </li>
             <li>
-              <Link fontWeight="bold" className="header-link">
+              <Link fontWeight="bold" textDecoration={"none"}>
                 Boots
               </Link>
             </li>

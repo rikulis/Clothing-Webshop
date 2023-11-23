@@ -15,8 +15,8 @@
 }
 
 .logo {
-  width: auto; /* Set the width of your logo */
-  height: auto;
+  width: 100px; /* Set the width of your logo */
+  height: 100px;
   margin-right: 20px; /* Adjust the margin between logo and icons */
 }
 

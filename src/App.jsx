@@ -5,11 +5,12 @@ import Footer from "./myComponents/Footer";
 import SecondHeader from "./myComponents/SecondHeader";
 import "./App.css";
 import ProductComponent from "./myComponents/ProductComponent";
-
+import Account from "./myComponents/Account";
 function App() {
   return (
     <>
       <div>
+        <Account></Account>
         <SecondHeader></SecondHeader>
         <Header></Header>
 

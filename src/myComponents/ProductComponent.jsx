@@ -22,6 +22,8 @@ const ProductComponent = () => {
       });
   }, []);
 
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+
   if (!Array.isArray(products)) {
     return <div>Loading...</div>;
   }
@@ -33,8 +35,21 @@ const ProductComponent = () => {
       </Text>
       <div className="product-grid">
         {products.map((product, index) => (
-          <Card key={index} maxW="sm" boxShadow="md" borderRadius="lg">
-            <Image src={product.image} alt={product.name} borderRadius="lg" />
+          <Card
+            key={index}
+            maxW="sm"
+            boxShadow="md"
+            borderRadius="lg"
+            onMouseEnter={() => setHoveredIndex(index)}
+            onMouseLeave={() => setHoveredIndex(null)}
+          >
+            <Image
+              src={
+                hoveredIndex === index ? product.hoveredImage : product.image
+              }
+              alt={product.name}
+              borderRadius="lg"
+            />
             <CardBody>
               <Stack mt="6" spacing="3">
                 <Heading size="md">{product.name}</Heading>
