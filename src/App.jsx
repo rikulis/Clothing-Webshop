@@ -10,10 +10,8 @@ function App() {
   return (
     <>
       <div>
-        <Account></Account>
         <SecondHeader></SecondHeader>
         <Header></Header>
-
         <ButtonComponent></ButtonComponent>
       </div>
       <ProductComponent></ProductComponent>

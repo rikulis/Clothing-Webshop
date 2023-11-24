@@ -1,14 +1,21 @@
 import React from "react";
-import { Box, Image, Flex, Button } from "@chakra-ui/react";
-
-import logo from "/Logo.png"; // Replace 'Logo.png' with the path to your logo file
+import { Box, Flex, Button } from "@chakra-ui/react";
 
 const SecondHeader = () => {
   return (
-    <Box className="second-header">
-      <Flex align="center" justify="space-between" px={4} py={2}>
-        <Box className="logo-container" bg="gray.200" borderRadius="md">
-          <Image src={logo} alt="Logo" className="logo" />
+    <Box className="second-header" p={4}>
+      <Flex align="center" justify="space-between">
+        <Box>
+          <Box
+            as="h1"
+            fontSize="2xl"
+            fontWeight="bold"
+            color="white"
+            bgGradient="linear(to-r, pink.500, purple.500)"
+            bgClip="text"
+          >
+            WEARIT
+          </Box>
         </Box>
         <Box className="buttons-container">
           <Button

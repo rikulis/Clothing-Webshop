@@ -1,6 +1,5 @@
 import React from "react";
 import { Container, HStack, VStack, Text, Link } from "@chakra-ui/react";
-import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 import "../componentStyles/Footer.css";
 
 const Footer = () => (
@@ -8,7 +7,6 @@ const Footer = () => (
     as="footer"
     role="contentinfo"
     py={{ base: "12", md: "16" }}
-    bg="gray.200"
     maxW="full"
     centerContent
   >

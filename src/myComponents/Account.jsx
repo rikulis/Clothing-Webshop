@@ -39,7 +39,9 @@ const Account = () => {
 
   return (
     <>
-      <Button onClick={onOpen}>Your Account</Button>
+      <Button onClick={onOpen} marginEnd={4}>
+        Sign Up
+      </Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
