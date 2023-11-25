@@ -12,7 +12,6 @@ function App() {
       <div>
         <SecondHeader></SecondHeader>
         <Header></Header>
-        <ButtonComponent></ButtonComponent>
       </div>
       <ProductComponent></ProductComponent>
       <div>

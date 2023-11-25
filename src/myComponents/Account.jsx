@@ -13,7 +13,7 @@ import {
   Stack,
 } from "@chakra-ui/react";
 
-const Account = () => {
+const Account = ({ isAuthenticated }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [formData, setFormData] = useState({
@@ -39,9 +39,15 @@ const Account = () => {
 
   return (
     <>
-      <Button onClick={onOpen} marginEnd={4}>
-        Sign Up
-      </Button>
+      {isAuthenticated ? (
+        <Button onClick={onOpen} marginEnd={4}>
+          Account
+        </Button>
+      ) : (
+        <Button onClick={onOpen} marginEnd={4}>
+          Sign Up
+        </Button>
+      )}
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
@@ -82,7 +88,7 @@ const Account = () => {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={handleSubmit}>
+            <Button colorScheme="purple" mr={3} onClick={handleSubmit}>
               Save
             </Button>
             <Button variant="ghost" onClick={onClose}>

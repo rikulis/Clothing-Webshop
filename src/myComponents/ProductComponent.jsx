@@ -10,16 +10,16 @@ import {
   Divider,
   Button,
   useDisclosure,
-  Alert,
-  AlertIcon,
+  useToast,
 } from "@chakra-ui/react";
 
 const ProductComponent = () => {
   const [products, setProducts] = useState([]);
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [loadingStates, setLoadingStates] = useState([]);
-  const [successMessages, setSuccessMessages] = useState([]);
+  const [selectedSize, setSelectedSize] = useState(null);
   const { isOpen, onToggle } = useDisclosure();
+  const toast = useToast(); // Add this line
 
   useEffect(() => {
     fetch("/db.json")
@@ -27,9 +27,18 @@ const ProductComponent = () => {
       .then((data) => {
         setProducts(data);
         setLoadingStates(new Array(data.length).fill(false));
-        setSuccessMessages(new Array(data.length).fill(false));
       });
   }, []);
+
+  // Extract unique sizes from products
+  const allSizes = Array.from(
+    new Set(products.flatMap((product) => product.sizes))
+  );
+
+  // Filter products based on selected size
+  const filteredProducts = selectedSize
+    ? products.filter((product) => product.sizes.includes(selectedSize))
+    : products;
 
   const handleClick = (index) => {
     setLoadingStates((prevStates) =>
@@ -44,15 +53,13 @@ const ProductComponent = () => {
       );
       onToggle();
 
-      // Display success message after another 2 seconds
-      setSuccessMessages((prevStates) =>
-        prevStates.map((state, i) => (i === index ? true : state))
-      );
-      setTimeout(() => {
-        setSuccessMessages((prevStates) =>
-          prevStates.map((state, i) => (i === index ? false : state))
-        );
-      }, 2000);
+      // Display toast instead of success message
+      toast({
+        title: "Order was successful!",
+        status: "success",
+        duration: 2000,
+        isClosable: true,
+      });
     }, 2000);
   };
 
@@ -63,10 +70,29 @@ const ProductComponent = () => {
   return (
     <div>
       <Text mt={4} textAlign="left" color="gray.600">
-        Total Products: {products.length}
+        Total Products: {filteredProducts.length}
       </Text>
+      {/* Buttons for each size */}
+      <div>
+        <Text fontWeight={"bold"} fontSize={"xl"}>
+          Sizes:
+        </Text>
+        {allSizes.map((size) => (
+          <Button
+            key={size}
+            margin={1}
+            colorScheme={selectedSize === size ? "purple" : "gray"}
+            onClick={() => setSelectedSize(selectedSize === size ? null : size)}
+            borderRadius="full" // Make the button round
+            _focus={{ outline: "none" }} // Remove outline on focus
+            w="40px"
+          >
+            {size}
+          </Button>
+        ))}
+      </div>
       <div className="product-grid">
-        {products.map((product, index) => (
+        {filteredProducts.map((product, index) => (
           <Card
             key={index}
             maxW="sm"
@@ -89,6 +115,8 @@ const ProductComponent = () => {
                 <Text color="black" fontSize="xl" fontWeight={"bold"}>
                   ${product.price}
                 </Text>
+                <Text>Available in:</Text>
+                <Text fontWeight={"bold"}>{product.sizes.join(" ")}</Text>
               </Stack>
             </CardBody>
             <Divider />
@@ -103,12 +131,6 @@ const ProductComponent = () => {
             >
               Add to cart
             </Button>
-            {successMessages[index] && (
-              <Alert status="success" mt={4}>
-                <AlertIcon />
-                Order was successful!
-              </Alert>
-            )}
           </Card>
         ))}
       </div>

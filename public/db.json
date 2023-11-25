@@ -6,7 +6,9 @@
     "image": "/productImages/WhitePants.jpg",
     "hoveredImage": "/productImages/WhitePantsFront.jpg",
     "price": 49.99,
-    "brand": "SIKSILK"
+    "brand": "SIKSILK",
+    "sizes": ["XS", "M", "XL"],
+    "gender": "men"
   },
   {
     "id": 2,
@@ -15,7 +17,9 @@
     "image": "/productImages/WhitePants.jpg",
     "hoveredImage": "/productImages/WhitePantsFront.jpg",
     "price": 79.99,
-    "brand": "SIKSILK"
+    "brand": "SIKSILK",
+    "sizes": ["S", "L", "XXL"],
+    "gender": "women"
   },
   {
     "id": 3,
@@ -24,7 +28,9 @@
     "image": "/productImages/WhitePants.jpg",
     "hoveredImage": "/productImages/WhitePantsFront.jpg",
     "price": 39.99,
-    "brand": "SIKSILK"
+    "brand": "SIKSILK",
+    "sizes": ["S", "M", "L"],
+    "gender": "children"
   },
   {
     "id": 4,
@@ -33,7 +39,9 @@
     "image": "/productImages/WhitePants.jpg",
     "hoveredImage": "/productImages/WhitePantsFront.jpg",
     "price": 39.99,
-    "brand": "SIKSILK"
+    "brand": "SIKSILK",
+    "sizes": ["M", "L", "XL"],
+    "gender": "men"
   },
   {
     "id": 5,
@@ -42,7 +50,9 @@
     "image": "/productImages/WhitePants.jpg",
     "hoveredImage": "/productImages/WhitePantsFront.jpg",
     "price": 39.99,
-    "brand": "SIKSILK"
+    "brand": "SIKSILK",
+    "sizes": ["XS", "S", "XXL"],
+    "gender": "women"
   },
   {
     "id": 6,
@@ -51,7 +61,9 @@
     "image": "/productImages/WhitePants.jpg",
     "hoveredImage": "/productImages/WhitePantsFront.jpg",
     "price": 39.99,
-    "brand": "SIKSILK"
+    "brand": "SIKSILK",
+    "sizes": ["S", "M", "L"],
+    "gender": "children"
   },
   {
     "id": 7,
@@ -60,7 +72,9 @@
     "image": "/productImages/WhitePants.jpg",
     "hoveredImage": "/productImages/WhitePantsFront.jpg",
     "price": 39.99,
-    "brand": "SIKSILK"
+    "brand": "SIKSILK",
+    "sizes": ["M", "L", "XL"],
+    "gender": "men"
   },
   {
     "id": 8,
@@ -69,6 +83,8 @@
     "image": "/productImages/WhitePants.jpg",
     "hoveredImage": "/productImages/WhitePantsFront.jpg",
     "price": 39.99,
-    "brand": "SIKSILK"
+    "brand": "SIKSILK",
+    "sizes": ["L", "XL", "XXL"],
+    "gender": "women"
   }
 ]
