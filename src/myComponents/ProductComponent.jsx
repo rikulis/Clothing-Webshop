@@ -19,7 +19,7 @@ const ProductComponent = () => {
   const [loadingStates, setLoadingStates] = useState([]);
   const [selectedSize, setSelectedSize] = useState(null);
   const { isOpen, onToggle } = useDisclosure();
-  const toast = useToast(); // Add this line
+  const toast = useToast();
 
   useEffect(() => {
     fetch("/db.json")
@@ -46,14 +46,14 @@ const ProductComponent = () => {
     );
     onToggle();
 
-    // Simulate an asynchronous operation (replace this with your actual logic)
+    // Simulate an asynchronous operation
     setTimeout(() => {
       setLoadingStates((prevStates) =>
         prevStates.map((state, i) => (i === index ? false : state))
       );
       onToggle();
 
-      // Display toast instead of success message
+      // Display toast
       toast({
         title: "Order was successful!",
         status: "success",
@@ -72,7 +72,7 @@ const ProductComponent = () => {
       <Text mt={4} textAlign="left" color="gray.600">
         Total Products: {filteredProducts.length}
       </Text>
-      {/* Buttons for each size */}
+
       <div>
         <Text fontWeight={"bold"} fontSize={"xl"}>
           Sizes:
@@ -83,8 +83,8 @@ const ProductComponent = () => {
             margin={1}
             colorScheme={selectedSize === size ? "purple" : "gray"}
             onClick={() => setSelectedSize(selectedSize === size ? null : size)}
-            borderRadius="full" // Make the button round
-            _focus={{ outline: "none" }} // Remove outline on focus
+            borderRadius="full"
+            _focus={{ outline: "none" }}
             w="40px"
           >
             {size}
@@ -108,6 +108,7 @@ const ProductComponent = () => {
               alt={product.name}
               borderRadius="lg"
             />
+
             <CardBody>
               <Stack mt="6" spacing="3">
                 <Heading size="md">{product.name}</Heading>

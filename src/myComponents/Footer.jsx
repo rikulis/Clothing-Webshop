@@ -1,5 +1,12 @@
 import React from "react";
-import { Container, HStack, VStack, Text, Link } from "@chakra-ui/react";
+import {
+  Container,
+  HStack,
+  VStack,
+  Text,
+  Link,
+  Divider,
+} from "@chakra-ui/react";
 import "../componentStyles/Footer.css";
 
 const Footer = () => (
@@ -10,6 +17,7 @@ const Footer = () => (
     maxW="full"
     centerContent
   >
+    <Divider></Divider>
     <HStack
       spacing={{ base: "4", md: "5" }}
       align="center"
@@ -20,33 +28,57 @@ const Footer = () => (
         <Text fontWeight="bold" fontSize="lg">
           HELP
         </Text>
-        <Link className="footer-link">Your Account</Link>
-        <Link className="footer-link">FAQ</Link>
-        <Link className="footer-link">Contact Us</Link>
+        <Link className="footer-link" _hover={{ textDecor: "underline white" }}>
+          Your Account
+        </Link>
+        <Link className="footer-link" _hover={{ textDecor: "underline white" }}>
+          FAQ
+        </Link>
+        <Link className="footer-link" _hover={{ textDecor: "underline white" }}>
+          Contact Us
+        </Link>
       </VStack>
       <VStack align="start">
         <Text fontWeight="bold" fontSize="lg">
           ABOUT
         </Text>
-        <Link className="footer-link">Blog</Link>
-        <Link className="footer-link">Our Story</Link>
-        <Link className="footer-link">Sitemap</Link>
+        <Link className="footer-link" _hover={{ textDecor: "underline white" }}>
+          Blog
+        </Link>
+        <Link className="footer-link" _hover={{ textDecor: "underline white" }}>
+          Our Story
+        </Link>
+        <Link className="footer-link" _hover={{ textDecor: "underline white" }}>
+          Sitemap
+        </Link>
       </VStack>
       <VStack align="start">
         <Text fontWeight="bold" fontSize="lg">
           PRODUCT
         </Text>
-        <Link className="footer-link">Return Policy</Link>
-        <Link className="footer-link">Product Care</Link>
-        <Link className="footer-link">Distributors</Link>
+        <Link className="footer-link" _hover={{ textDecor: "underline white" }}>
+          Return Policy
+        </Link>
+        <Link className="footer-link" _hover={{ textDecor: "underline white" }}>
+          Product Care
+        </Link>
+        <Link className="footer-link" _hover={{ textDecor: "underline white" }}>
+          Distributors
+        </Link>
       </VStack>
       <VStack align="start">
         <Text fontWeight="bold" fontSize="lg">
           SOCIAL
         </Text>
-        <Link className="footer-link">Instagram</Link>
-        <Link className="footer-link">Facebook</Link>
-        <Link className="footer-link">Twitter</Link>
+        <Link className="footer-link" _hover={{ textDecor: "underline white" }}>
+          Instagram
+        </Link>
+        <Link className="footer-link" _hover={{ textDecor: "underline white" }}>
+          Facebook
+        </Link>
+        <Link className="footer-link" _hover={{ textDecor: "underline white" }}>
+          Twitter
+        </Link>
       </VStack>
     </HStack>
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Flex, Button } from "@chakra-ui/react";
 
-const SecondHeader = () => {
+const LogoHeader = () => {
   return (
     <Box className="second-header" p={4}>
       <Flex align="center" justify="space-between">
@@ -13,6 +13,7 @@ const SecondHeader = () => {
             color="white"
             bgGradient="linear(to-r, pink.500, purple.500)"
             bgClip="text"
+            _focus={{ outline: "none" }}
           >
             WEARIT
           </Box>
@@ -24,6 +25,7 @@ const SecondHeader = () => {
             size="md"
             mr={2}
             rounded={"none"}
+            _focus={{ outline: "none" }}
           >
             Men
           </Button>
@@ -33,6 +35,7 @@ const SecondHeader = () => {
             size="md"
             mr={2}
             rounded={"none"}
+            _focus={{ outline: "none" }}
           >
             Women
           </Button>
@@ -45,4 +48,4 @@ const SecondHeader = () => {
   );
 };
 
-export default SecondHeader;
+export default LogoHeader;
