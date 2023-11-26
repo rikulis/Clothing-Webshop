@@ -16,6 +16,10 @@ import {
 const Account = ({ isAuthenticated }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  // Add a state for isAuthenticated
+  const [isAuthenticatedState, setIsAuthenticatedState] =
+    useState(isAuthenticated);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -34,12 +38,16 @@ const Account = ({ isAuthenticated }) => {
   const handleSubmit = () => {
     // Handle form submission logic here
     console.log("Form Data:", formData);
+
+    // Set isAuthenticatedState to true when the form is submitted
+    setIsAuthenticatedState(true);
+
     onClose();
   };
 
   return (
     <>
-      {isAuthenticated ? (
+      {isAuthenticatedState ? (
         <Button onClick={onOpen} marginEnd={4}>
           Account
         </Button>

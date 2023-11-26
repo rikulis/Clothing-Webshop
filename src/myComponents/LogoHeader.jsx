@@ -27,7 +27,7 @@ const LogoHeader = () => {
             rounded={"none"}
             _focus={{ outline: "none" }}
           >
-            Men
+            Account
           </Button>
           <Button
             variant="outline"
@@ -37,10 +37,10 @@ const LogoHeader = () => {
             rounded={"none"}
             _focus={{ outline: "none" }}
           >
-            Women
+            Shopping Cart
           </Button>
           <Button variant="outline" color="black" size="md" rounded={"none"}>
-            Children
+            Favorites
           </Button>
         </Box>
       </Flex>

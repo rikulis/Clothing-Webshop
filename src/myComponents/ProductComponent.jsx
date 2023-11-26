@@ -12,12 +12,14 @@ import {
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
+import "./LogoHeader";
 
 const ProductComponent = () => {
   const [products, setProducts] = useState([]);
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [loadingStates, setLoadingStates] = useState([]);
   const [selectedSize, setSelectedSize] = useState(null);
+  const [selectedGender, setSelectedGender] = useState(null);
   const { isOpen, onToggle } = useDisclosure();
   const toast = useToast();
 
@@ -35,10 +37,25 @@ const ProductComponent = () => {
     new Set(products.flatMap((product) => product.sizes))
   );
 
-  // Filter products based on selected size
-  const filteredProducts = selectedSize
-    ? products.filter((product) => product.sizes.includes(selectedSize))
-    : products;
+  // Extract unique genders from products
+  const allGenders = Array.from(
+    new Set(products.flatMap((product) => product.gender))
+  );
+
+  // Filter products based on selected size and gender
+  const filteredProducts = products
+    .filter((product) =>
+      selectedSize ? product.sizes.includes(selectedSize) : true
+    )
+    .filter((product) => {
+      const sizeCondition = selectedSize
+        ? product.sizes.includes(selectedSize)
+        : true;
+      const genderCondition = selectedGender
+        ? product.gender === selectedGender
+        : true;
+      return sizeCondition && genderCondition;
+    });
 
   const handleClick = (index) => {
     setLoadingStates((prevStates) =>
@@ -55,7 +72,7 @@ const ProductComponent = () => {
 
       // Display toast
       toast({
-        title: "Order was successful!",
+        title: "Order added to shopping cart.",
         status: "success",
         duration: 2000,
         isClosable: true,
@@ -69,10 +86,6 @@ const ProductComponent = () => {
 
   return (
     <div>
-      <Text mt={4} textAlign="left" color="gray.600">
-        Total Products: {filteredProducts.length}
-      </Text>
-
       <div>
         <Text fontWeight={"bold"} fontSize={"xl"}>
           Sizes:
@@ -91,50 +104,83 @@ const ProductComponent = () => {
           </Button>
         ))}
       </div>
-      <div className="product-grid">
-        {filteredProducts.map((product, index) => (
-          <Card
-            key={index}
-            maxW="sm"
-            boxShadow="md"
-            borderRadius="lg"
-            onMouseEnter={() => setHoveredIndex(index)}
-            onMouseLeave={() => setHoveredIndex(null)}
+      <div>
+        <Text fontWeight={"bold"} fontSize={"xl"}>
+          Gender:
+        </Text>
+        {allGenders.map((gender) => (
+          <Button
+            key={gender}
+            margin={1}
+            colorScheme={selectedGender === gender ? "purple" : "gray"}
+            onClick={() =>
+              setSelectedGender(selectedGender === gender ? null : gender)
+            }
+            borderRadius="full"
+            _focus={{ outline: "none" }}
           >
-            <Image
-              src={
-                hoveredIndex === index ? product.hoveredImage : product.image
-              }
-              alt={product.name}
-              borderRadius="lg"
-            />
-
-            <CardBody>
-              <Stack mt="6" spacing="3">
-                <Heading size="md">{product.name}</Heading>
-                <Text>{product.description}</Text>
-                <Text color="black" fontSize="xl" fontWeight={"bold"}>
-                  ${product.price}
-                </Text>
-                <Text>Available in:</Text>
-                <Text fontWeight={"bold"}>{product.sizes.join(" ")}</Text>
-              </Stack>
-            </CardBody>
-            <Divider />
-
-            <Button
-              variant="solid"
-              colorScheme="purple"
-              rounded="none"
-              isLoading={loadingStates[index]}
-              loadingText="Adding to cart"
-              onClick={() => handleClick(index)}
-            >
-              Add to cart
-            </Button>
-          </Card>
+            {gender}
+          </Button>
         ))}
       </div>
+      {filteredProducts.length === 0 ? (
+        <Text mt={4} textAlign="left" color="gray.600">
+          Currently there are no products available that match your search.
+        </Text>
+      ) : (
+        <>
+          <Text mt={4} textAlign="left" color="gray.600">
+            Total Products: {filteredProducts.length}
+          </Text>
+
+          <div className="product-grid">
+            {filteredProducts.map((product, index) => (
+              <Card
+                key={index}
+                maxW="sm"
+                boxShadow="md"
+                borderRadius="lg"
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
+              >
+                <Image
+                  src={
+                    hoveredIndex === index
+                      ? product.hoveredImage
+                      : product.image
+                  }
+                  alt={product.name}
+                  borderRadius="lg"
+                />
+
+                <CardBody>
+                  <Stack mt="6" spacing="3">
+                    <Heading size="md">{product.name}</Heading>
+                    <Text>{product.description}</Text>
+                    <Text color="black" fontSize="xl" fontWeight={"bold"}>
+                      ${product.price}
+                    </Text>
+                    <Text>Available in:</Text>
+                    <Text fontWeight={"bold"}>{product.sizes.join(" ")}</Text>
+                  </Stack>
+                </CardBody>
+                <Divider />
+
+                <Button
+                  variant="solid"
+                  colorScheme="purple"
+                  rounded="none"
+                  isLoading={loadingStates[index]}
+                  loadingText="Adding to cart"
+                  onClick={() => handleClick(index)}
+                >
+                  Add to cart
+                </Button>
+              </Card>
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 };

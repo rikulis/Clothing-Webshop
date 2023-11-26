@@ -23,6 +23,7 @@ const Footer = () => (
       align="center"
       w="full"
       justify={"space-around"}
+      py={5}
     >
       <VStack align="start">
         <Text fontWeight="bold" fontSize="lg">
