@@ -11,6 +11,7 @@ import {
   Button,
   useDisclosure,
   useToast,
+  Flex,
 } from "@chakra-ui/react";
 import "./LogoHeader";
 
@@ -86,43 +87,52 @@ const ProductComponent = () => {
 
   return (
     <div>
-      <div>
-        <Text fontWeight={"bold"} fontSize={"xl"}>
-          Sizes:
-        </Text>
-        {allSizes.map((size) => (
-          <Button
-            key={size}
-            margin={1}
-            colorScheme={selectedSize === size ? "purple" : "gray"}
-            onClick={() => setSelectedSize(selectedSize === size ? null : size)}
-            borderRadius="full"
-            _focus={{ outline: "none" }}
-            w="40px"
-          >
-            {size}
-          </Button>
-        ))}
-      </div>
-      <div>
-        <Text fontWeight={"bold"} fontSize={"xl"}>
-          Gender:
-        </Text>
-        {allGenders.map((gender) => (
-          <Button
-            key={gender}
-            margin={1}
-            colorScheme={selectedGender === gender ? "purple" : "gray"}
-            onClick={() =>
-              setSelectedGender(selectedGender === gender ? null : gender)
-            }
-            borderRadius="full"
-            _focus={{ outline: "none" }}
-          >
-            {gender}
-          </Button>
-        ))}
-      </div>
+      <Flex justify={"space-around"} align={"center"} my={5}>
+        <div>
+          <Text fontWeight={"bold"} fontSize={"xl"}>
+            Sizes
+          </Text>
+          {allSizes.map((size) => (
+            <Button
+              key={size}
+              margin={1}
+              colorScheme={selectedSize === size ? "purple" : "gray"}
+              onClick={() =>
+                setSelectedSize(selectedSize === size ? null : size)
+              }
+              borderRadius="full"
+              _focus={{ outline: "none" }}
+              w="40px"
+            >
+              {size}
+            </Button>
+          ))}
+        </div>
+
+        <div>
+          <Text fontWeight={"bold"} fontSize={"xl"}>
+            Category
+          </Text>
+          {allGenders.map((gender) => (
+            <Button
+              key={gender}
+              variant="solid"
+              color="black"
+              size="md"
+              mr={2}
+              rounded={"5"}
+              _focus={{ outline: "none" }}
+              colorScheme={selectedGender === gender ? "purple" : "gray"}
+              style={{ color: selectedGender === gender ? "white" : "black" }}
+              onClick={() =>
+                setSelectedGender(selectedGender === gender ? null : gender)
+              }
+            >
+              {gender}
+            </Button>
+          ))}
+        </div>
+      </Flex>
       {filteredProducts.length === 0 ? (
         <Text mt={4} textAlign="left" color="gray.600">
           Currently there are no products available that match your search.

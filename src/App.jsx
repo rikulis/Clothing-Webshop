@@ -5,7 +5,6 @@ import Footer from "./myComponents/Footer";
 import LogoHeader from "./myComponents/LogoHeader";
 import "./App.css";
 import ProductComponent from "./myComponents/ProductComponent";
-import Account from "./myComponents/Account";
 function App() {
   return (
     <>

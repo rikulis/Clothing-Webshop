@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Flex, Spacer, Input, Link } from "@chakra-ui/react";
 import "../componentStyles/Header.css";
-import Account from "../myComponents/Account";
+
 
 const Header = () => {
   return (
@@ -91,7 +91,7 @@ const Header = () => {
           marginEnd={7}
           marginStart={5}
         />
-        <Account></Account>
+        
       </Flex>
     </Box>
   );

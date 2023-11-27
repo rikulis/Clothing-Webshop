@@ -1,5 +1,7 @@
 import React from "react";
 import { Box, Flex, Button } from "@chakra-ui/react";
+import Account from "./Account";
+import ShoppingCart from "./ShoppingCart";
 
 const LogoHeader = () => {
   return (
@@ -19,26 +21,8 @@ const LogoHeader = () => {
           </Box>
         </Box>
         <Box className="buttons-container">
-          <Button
-            variant="outline"
-            color="black"
-            size="md"
-            mr={2}
-            rounded={"none"}
-            _focus={{ outline: "none" }}
-          >
-            Account
-          </Button>
-          <Button
-            variant="outline"
-            color="black"
-            size="md"
-            mr={2}
-            rounded={"none"}
-            _focus={{ outline: "none" }}
-          >
-            Shopping Cart
-          </Button>
+          <Account></Account>
+
           <Button variant="outline" color="black" size="md" rounded={"none"}>
             Favorites
           </Button>

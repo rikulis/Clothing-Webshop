@@ -11,7 +11,9 @@ import {
   Button,
   Input,
   Stack,
+  useToast,
 } from "@chakra-ui/react";
+import ShoppingCart from "./ShoppingCart";
 
 const Account = ({ isAuthenticated }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -27,6 +29,9 @@ const Account = ({ isAuthenticated }) => {
     address: "",
   });
 
+  // Initialize the toast
+  const toast = useToast();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -36,11 +41,45 @@ const Account = ({ isAuthenticated }) => {
   };
 
   const handleSubmit = () => {
+    // Validate form data
+    if (
+      formData.name.trim() === "" ||
+      formData.email.trim() === "" ||
+      formData.phoneNumber.trim() === "" ||
+      formData.address.trim() === ""
+    ) {
+      // Display an error toast
+      toast({
+        position: "top",
+        title: "Please fill in all fields",
+        status: "error",
+        duration: 3000,
+      });
+      return;
+    }
+
     // Handle form submission logic here
     console.log("Form Data:", formData);
 
     // Set isAuthenticatedState to true when the form is submitted
     setIsAuthenticatedState(true);
+
+    // Display a success toast
+    if (isAuthenticatedState) {
+      toast({
+        position: "top",
+        title: "Account details updated",
+        status: "success",
+        duration: 1000,
+      });
+    } else {
+      toast({
+        position: "top",
+        title: "Account created successfully",
+        status: "success",
+        duration: 1000,
+      });
+    }
 
     onClose();
   };
@@ -48,11 +87,29 @@ const Account = ({ isAuthenticated }) => {
   return (
     <>
       {isAuthenticatedState ? (
-        <Button onClick={onOpen} marginEnd={4}>
+        <Button
+          onClick={onOpen}
+          marginEnd={4}
+          variant="outline"
+          color="black"
+          size="md"
+          mr={2}
+          rounded={"none"}
+          _focus={{ outline: "none" }}
+        >
           Account
         </Button>
       ) : (
-        <Button onClick={onOpen} marginEnd={4}>
+        <Button
+          onClick={onOpen}
+          marginEnd={4}
+          variant="outline"
+          color="black"
+          size="md"
+          mr={2}
+          rounded={"none"}
+          _focus={{ outline: "none" }}
+        >
           Sign Up
         </Button>
       )}
@@ -65,6 +122,7 @@ const Account = ({ isAuthenticated }) => {
           <ModalBody>
             <Stack spacing={3}>
               <Input
+                required
                 type="text"
                 placeholder="Name"
                 name="name"
@@ -105,6 +163,7 @@ const Account = ({ isAuthenticated }) => {
           </ModalFooter>
         </ModalContent>
       </Modal>
+      <ShoppingCart formData={formData}></ShoppingCart>
     </>
   );
 };
