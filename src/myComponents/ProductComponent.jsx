@@ -14,6 +14,7 @@ import {
   Flex,
 } from "@chakra-ui/react";
 import "./LogoHeader";
+import { useCart } from "./CartContext";
 
 const ProductComponent = () => {
   const [products, setProducts] = useState([]);
@@ -22,7 +23,9 @@ const ProductComponent = () => {
   const [selectedSize, setSelectedSize] = useState(null);
   const [selectedGender, setSelectedGender] = useState(null);
   const { isOpen, onToggle } = useDisclosure();
+  const { state, dispatch } = useCart();
   const toast = useToast();
+  const { addToCart } = useCart();
 
   useEffect(() => {
     fetch("/db.json")
@@ -78,6 +81,12 @@ const ProductComponent = () => {
         duration: 2000,
         isClosable: true,
       });
+
+      // Get the product details from the filteredProducts array
+      const productToAdd = filteredProducts[index];
+
+      // Add the product to the cart using the addToCart function
+      addToCart(productToAdd);
     }, 2000);
   };
 
@@ -134,7 +143,7 @@ const ProductComponent = () => {
         </div>
       </Flex>
       {filteredProducts.length === 0 ? (
-        <Text mt={4} textAlign="left" color="gray.600">
+        <Text mt={4} textAlign="center" color="gray.600">
           Currently there are no products available that match your search.
         </Text>
       ) : (
