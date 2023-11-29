@@ -11,9 +11,13 @@ import {
   Box,
   Image,
   Text,
+  Checkbox,
+  Select,
   Flex,
+  Stack,
 } from "@chakra-ui/react";
 import { useCart } from "./CartContext";
+import ProductAmountInput from "./ProductAmountInput";
 
 function ShoppingCart({ formData }) {
   const [size, setSize] = useState("");
@@ -47,9 +51,9 @@ function ShoppingCart({ formData }) {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader>Shopping Cart</DrawerHeader>
+          <DrawerHeader fontWeight={"bold"}>Shopping Cart</DrawerHeader>
           <DrawerBody>
-            <Box mb={4}>
+            <Box mb={4} p={2}>
               <Text fontSize="20px" fontWeight="bold">
                 Account
               </Text>
@@ -60,32 +64,38 @@ function ShoppingCart({ formData }) {
             </Box>
 
             {cartItems.map((item, index) => (
-              <Flex
-                key={index}
-                mb={4}
-                py={0}
-                borderBottom="1px solid darkgrey"
-                align="center"
-                style={{
-                  backgroundColor: "rgb(240, 240, 240)",
-                  borderRadius: "5px",
-                }}
-              >
+              <Box key={index} mb={4} p={2} borderBottom="1px solid #ccc">
                 <Image
                   src={item.image}
                   alt={item.name}
                   maxWidth="50%"
                   height="auto"
                   borderRadius="5px"
-                  mr={2}
+                  mb={2}
                 />
-                <Box>
-                  <Text>{item.name}</Text>
-                  <Text fontWeight={"bold"}>${item.price}</Text>
-                </Box>
-              </Flex>
+                <Text>{item.name}</Text>
+                <Flex>
+                  <ProductAmountInput />
+                  <Select
+                    placeholder="Select Size"
+                    size={"sm"}
+                    maxWidth={"33%"}
+                    px={2}
+                  >
+                    <option value="option1">S</option>
+                    <option value="option2">M</option>
+                    <option value="option3">L</option>
+                  </Select>
+                </Flex>
+                <Text fontWeight={"bold"} marginTop={3}>
+                  ${item.price}
+                </Text>
+              </Box>
             ))}
-            <Button>Cash Out</Button>
+            <Stack>
+              <Checkbox defaultChecked>Join our mailing list</Checkbox>
+              <Button>Cash Out</Button>
+            </Stack>
           </DrawerBody>
         </DrawerContent>
       </Drawer>

@@ -132,7 +132,10 @@ const ProductComponent = () => {
               rounded={"5"}
               _focus={{ outline: "none" }}
               colorScheme={selectedGender === gender ? "purple" : "gray"}
-              style={{ color: selectedGender === gender ? "white" : "black" }}
+              style={{
+                color: selectedGender === gender ? "white" : "black",
+                textTransform: "Capitalize",
+              }}
               onClick={() =>
                 setSelectedGender(selectedGender === gender ? null : gender)
               }

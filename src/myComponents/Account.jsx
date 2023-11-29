@@ -12,6 +12,8 @@ import {
   Input,
   Stack,
   useToast,
+  InputGroup,
+  InputRightElement,
 } from "@chakra-ui/react";
 import ShoppingCart from "./ShoppingCart";
 
@@ -28,6 +30,12 @@ const Account = ({ isAuthenticated }) => {
     phoneNumber: "",
     address: "",
   });
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   // Initialize the toast
   const toast = useToast();
@@ -129,6 +137,26 @@ const Account = ({ isAuthenticated }) => {
                 value={formData.name}
                 onChange={handleChange}
               />
+              <InputGroup size="md">
+                <Input
+                  required
+                  pr="4.5rem"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                />
+                <InputRightElement width="4.5rem">
+                  <Button
+                    h="1.75rem"
+                    size="sm"
+                    onClick={togglePasswordVisibility}
+                  >
+                    {showPassword ? "Hide" : "Show"}
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
               <Input
                 type="email"
                 placeholder="Email"
