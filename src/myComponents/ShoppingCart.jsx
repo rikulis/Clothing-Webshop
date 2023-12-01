@@ -24,6 +24,10 @@ function ShoppingCart({ formData }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { cartItems } = useCart();
 
+  const calculateTotalPrice = () => {
+    return cartItems.reduce((total, item) => total + item.price, 0);
+  };
+
   const handleClick = (newSize) => {
     setSize(newSize);
     onOpen();
@@ -74,17 +78,15 @@ function ShoppingCart({ formData }) {
                   mb={2}
                 />
                 <Text>{item.name}</Text>
+                <Text>{item.brand}</Text>
                 <Flex>
                   <ProductAmountInput />
-                  <Select
-                    placeholder="Select Size"
-                    size={"sm"}
-                    maxWidth={"33%"}
-                    px={2}
-                  >
-                    <option value="option1">S</option>
-                    <option value="option2">M</option>
-                    <option value="option3">L</option>
+                  <Select size={"sm"} maxWidth={"33%"} px={2}>
+                    {item.sizes.map((size) => (
+                      <option key={size} value={size}>
+                        {size}
+                      </option>
+                    ))}
                   </Select>
                 </Flex>
                 <Text fontWeight={"bold"} marginTop={3}>
@@ -93,8 +95,22 @@ function ShoppingCart({ formData }) {
               </Box>
             ))}
             <Stack>
+              <Text fontWeight={"bold"} marginTop={3}>
+                Total Price: ${calculateTotalPrice().toFixed(2)}
+              </Text>
               <Checkbox defaultChecked>Join our mailing list</Checkbox>
-              <Button>Cash Out</Button>
+              <Button
+                color="white"
+                bgGradient="linear(to-r, pink.500, purple.500)"
+                fontSize="md"
+                fontWeight="bold"
+                rounded={"none"}
+                _hover={{
+                  bgGradient: "linear(to-r, pink.600, purple.600)",
+                }}
+              >
+                Cash Out
+              </Button>
             </Stack>
           </DrawerBody>
         </DrawerContent>

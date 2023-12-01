@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 import "./LogoHeader";
 import { useCart } from "./CartContext";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
 
 const ProductComponent = () => {
   const [products, setProducts] = useState([]);
@@ -88,6 +89,24 @@ const ProductComponent = () => {
       // Add the product to the cart using the addToCart function
       addToCart(productToAdd);
     }, 2000);
+  };
+
+  const [likedProducts, setLikedProducts] = useState([]);
+
+  const toggleLike = (index) => {
+    setLikedProducts((prevLikedProducts) => {
+      const isLiked = prevLikedProducts.includes(index);
+      return isLiked
+        ? prevLikedProducts.filter((item) => item !== index)
+        : [...prevLikedProducts, index];
+    });
+    toast({
+      title: "Product added to favorites.",
+      status: "success",
+      duration: 2000,
+      isClosable: true,
+      position: "top",
+    });
   };
 
   if (!Array.isArray(products)) {
@@ -174,6 +193,23 @@ const ProductComponent = () => {
                   alt={product.name}
                   borderRadius="lg"
                 />
+                <Flex
+                  align="center"
+                  justify="flex-end"
+                  position="absolute"
+                  backgroundColor={"white"}
+                  right={0}
+                  p={1}
+                  borderRadius={5}
+                  onClick={() => toggleLike(index)}
+                  cursor="pointer"
+                >
+                  {likedProducts.includes(index) ? (
+                    <FaHeart size={20} color="purple" />
+                  ) : (
+                    <FaRegHeart size={20} color="purple" />
+                  )}
+                </Flex>
 
                 <CardBody>
                   <Stack mt="6" spacing="3">

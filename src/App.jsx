@@ -1,5 +1,3 @@
-import { useState } from "react";
-import ButtonComponent from "./myComponents/ButtonComponent";
 import Header from "./myComponents/Header";
 import Footer from "./myComponents/Footer";
 import LogoHeader from "./myComponents/LogoHeader";
