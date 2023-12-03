@@ -12,6 +12,8 @@ import {
   useDisclosure,
   useToast,
   Flex,
+  Grid,
+  GridItem,
 } from "@chakra-ui/react";
 import "./LogoHeader";
 import { useCart } from "./CartContext";
@@ -27,6 +29,7 @@ const ProductComponent = () => {
   const { state, dispatch } = useCart();
   const toast = useToast();
   const { addToCart } = useCart();
+  const [likedProducts, setLikedProducts] = useState([]);
 
   useEffect(() => {
     fetch("/db.json")
@@ -91,23 +94,20 @@ const ProductComponent = () => {
     }, 2000);
   };
 
-  const [likedProducts, setLikedProducts] = useState([]);
-
+  //Favorite function (Not working correctly yet)
   const toggleLike = (index) => {
     setLikedProducts((prevLikedProducts) => {
       const isLiked = prevLikedProducts.includes(index);
-      return isLiked
+      const newLikedProducts = isLiked
         ? prevLikedProducts.filter((item) => item !== index)
         : [...prevLikedProducts, index];
-    });
-    toast({
-      title: "Product added to favorites.",
-      status: "success",
-      duration: 2000,
-      isClosable: true,
-      position: "top",
+
+      // Show the toast only when the favorite button is clicked for the first time
+
+      return newLikedProducts;
     });
   };
+  //
 
   if (!Array.isArray(products)) {
     return <div>Loading...</div>;
@@ -115,7 +115,12 @@ const ProductComponent = () => {
 
   return (
     <div>
-      <Flex justify={"space-around"} align={"center"} my={5}>
+      <Flex
+        direction={{ base: "column", md: "row" }}
+        justify={"space-around"}
+        align={"center"}
+        my={5}
+      >
         <div>
           <Text fontWeight={"bold"} fontSize={"xl"}>
             Sizes
@@ -137,7 +142,7 @@ const ProductComponent = () => {
           ))}
         </div>
 
-        <div>
+        <div mt={{ base: 4, sm: 0 }}>
           <Text fontWeight={"bold"} fontSize={"xl"}>
             Category
           </Text>
@@ -174,69 +179,85 @@ const ProductComponent = () => {
             Total Products: {filteredProducts.length}
           </Text>
 
-          <div className="product-grid">
+          <Grid
+            templateColumns={{
+              base: "repeat(1, 1fr)",
+              sm: "repeat(1, 1fr)",
+              md: "repeat(3, 1fr)",
+              lg: "repeat(4, 1fr)",
+              xl: "repeat(5, 1fr)",
+            }}
+            gap={4}
+            maxWidth="1280px"
+            marginY={8}
+          >
             {filteredProducts.map((product, index) => (
-              <Card
-                key={index}
-                maxW="sm"
-                boxShadow="md"
-                borderRadius="lg"
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
-              >
-                <Image
-                  src={
-                    hoveredIndex === index
-                      ? product.hoveredImage
-                      : product.image
-                  }
-                  alt={product.name}
+              <GridItem key={index}>
+                <Card
+                  key={index}
+                  maxW="sm"
+                  boxShadow="md"
                   borderRadius="lg"
-                />
-                <Flex
-                  align="center"
-                  justify="flex-end"
-                  position="absolute"
-                  backgroundColor={"white"}
-                  right={0}
-                  p={1}
-                  borderRadius={5}
-                  onClick={() => toggleLike(index)}
-                  cursor="pointer"
+                  onMouseEnter={() => setHoveredIndex(index)}
+                  onMouseLeave={() => setHoveredIndex(null)}
                 >
-                  {likedProducts.includes(index) ? (
-                    <FaHeart size={20} color="purple" />
-                  ) : (
-                    <FaRegHeart size={20} color="purple" />
-                  )}
-                </Flex>
+                  <Image
+                    src={
+                      hoveredIndex === index
+                        ? product.hoveredImage
+                        : product.image
+                    }
+                    alt={product.name}
+                    borderRadius="lg"
+                  />
+                  <Flex
+                    align="center"
+                    justify="flex-end"
+                    position="absolute"
+                    backgroundColor={"white"}
+                    right={0}
+                    p={1}
+                    borderRadius={5}
+                    onClick={() => toggleLike(index)}
+                    cursor="pointer"
+                  >
+                    {likedProducts.includes(index) ? (
+                      <FaHeart size={20} color="purple" />
+                    ) : (
+                      <FaRegHeart size={20} color="purple" />
+                    )}
+                  </Flex>
 
-                <CardBody>
-                  <Stack mt="6" spacing="3">
-                    <Heading size="md">{product.name}</Heading>
-                    <Text>{product.description}</Text>
-                    <Text color="black" fontSize="xl" fontWeight={"bold"}>
-                      ${product.price}
-                    </Text>
-                    <Text>Available in:</Text>
-                    <Text fontWeight={"bold"}>{product.sizes.join(" ")}</Text>
-                  </Stack>
-                </CardBody>
-                <Divider />
+                  <CardBody>
+                    <Stack mt="6" spacing="3">
+                      <Heading size="md" minH={"50px"}>
+                        {product.name}
+                      </Heading>
+                      <Text fontStyle={"italic"}>{product.brand}</Text>
+                      <Text minH={"50px"}>{product.description}</Text>
+                      <Text color="black" fontSize="xl" fontWeight={"bold"}>
+                        ${product.price}
+                      </Text>
+                      <Text>Available in:</Text>
+                      <Text fontWeight={"bold"}>{product.sizes.join(" ")}</Text>
+                    </Stack>
+                  </CardBody>
+                  <Divider />
 
-                <Button
-                  variant="solid"
-                  colorScheme="purple"
-                  rounded="none"
-                  isLoading={loadingStates[index]}
-                  loadingText="Adding to cart"
-                  onClick={() => handleClick(index)}
-                >
-                  Add to cart
-                </Button>
-              </Card>
+                  <Button
+                    variant="solid"
+                    colorScheme="purple"
+                    rounded="none"
+                    isLoading={loadingStates[index]}
+                    loadingText="Adding to cart"
+                    onClick={() => handleClick(index)}
+                  >
+                    Add to cart
+                  </Button>
+                </Card>
+              </GridItem>
             ))}
-          </div>
+          </Grid>
         </>
       )}
     </div>

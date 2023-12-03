@@ -15,6 +15,8 @@ import {
   Select,
   Flex,
   Stack,
+  Divider,
+  useToast,
 } from "@chakra-ui/react";
 import { useCart } from "./CartContext";
 import ProductAmountInput from "./ProductAmountInput";
@@ -22,7 +24,8 @@ import ProductAmountInput from "./ProductAmountInput";
 function ShoppingCart({ formData }) {
   const [size, setSize] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { cartItems } = useCart();
+  const toast = useToast();
+  const { cartItems, clearCart } = useCart();
 
   const calculateTotalPrice = () => {
     return cartItems.reduce((total, item) => total + item.price, 0);
@@ -33,37 +36,79 @@ function ShoppingCart({ formData }) {
     onOpen();
   };
 
-  const sizes = ["md"];
+  const handleCashOut = () => {
+    onClose();
+
+    // Check if the cart has items and email is provided
+    if (cartItems.length > 0 && formData.email.trim() !== "") {
+      toast({
+        title: "Order successfully placed!",
+        status: "success",
+        duration: 2000,
+        position: "top",
+      });
+      clearCart(); // Clear the cart
+    } else {
+      // Display an error toast if the cart is empty or email is missing
+      toast({
+        title:
+          cartItems.length === 0
+            ? "Add items to the cart before ordering!"
+            : "Provide your email address before ordering!",
+        status: "error",
+        duration: 2000,
+        position: "top",
+      });
+    }
+
+    // Check if required user information is provided
+    if (
+      formData.name.trim() === "" ||
+      formData.email.trim() === "" ||
+      formData.phoneNumber.trim() === "" ||
+      formData.address.trim() === ""
+    ) {
+      // Display an error toast
+      toast({
+        position: "top",
+        title: "You must sign up properly before ordering!",
+        status: "error",
+        duration: 3000,
+      });
+    }
+  };
 
   return (
     <>
-      {sizes.map((size) => (
-        <Button
-          onClick={() => handleClick(size)}
-          variant="outline"
-          color="black"
-          size="md"
-          rounded={"none"}
-          key={size}
-          m={1}
-        >
-          Shopping Cart
-        </Button>
-      ))}
+      <Button
+        onClick={() => handleClick(size)}
+        variant="outline"
+        color="black"
+        size="md"
+        rounded={"none"}
+        key={size}
+        m={1}
+      >
+        Shopping Cart
+      </Button>
 
-      <Drawer onClose={onClose} isOpen={isOpen} size={size}>
+      <Drawer onClose={onClose} isOpen={isOpen} size="md">
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
           <DrawerHeader fontWeight={"bold"}>Shopping Cart</DrawerHeader>
           <DrawerBody>
-            <Box mb={4} p={2}>
+            <Box mb={4} p={2} border={"1px gray solid"}>
               <Text fontSize="20px" fontWeight="bold">
                 Account
               </Text>
+              <Divider />
               <Text>Name: {formData.name}</Text>
+              <Divider />
               <Text>Email: {formData.email}</Text>
+              <Divider />
               <Text>Phone Number: {formData.phoneNumber}</Text>
+              <Divider />
               <Text>Address: {formData.address}</Text>
             </Box>
 
@@ -108,6 +153,7 @@ function ShoppingCart({ formData }) {
                 _hover={{
                   bgGradient: "linear(to-r, pink.600, purple.600)",
                 }}
+                onClick={handleCashOut}
               >
                 Cash Out
               </Button>
