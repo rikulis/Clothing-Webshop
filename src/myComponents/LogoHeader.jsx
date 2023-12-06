@@ -6,8 +6,12 @@ import Favorites from "./Favorites";
 const LogoHeader = () => {
   return (
     <Box className="second-header" p={4}>
-      <Flex align="center" justify="space-between">
-        <Box>
+      <Flex
+        direction={{ base: "column", md: "row" }}
+        align="center"
+        justify="space-between"
+      >
+        <Box mb={{ base: 4, md: 0 }}>
           <Box
             as="h1"
             fontSize="2xl"
